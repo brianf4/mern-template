@@ -2,12 +2,14 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const todos = require('./routes/todoRoute')
 
 // express app
 const app = express()
 
 // middleware - logs our requests
+app.use(cors());
 app.use(express.json())
 
 app.use((req, res, next) => {
