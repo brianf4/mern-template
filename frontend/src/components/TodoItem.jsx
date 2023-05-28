@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 
 function TodoItem(props) {
+
+  
   
   return (
     <section className="p-4 border-2 border-black w-5/12">
@@ -11,7 +13,7 @@ function TodoItem(props) {
         <section className="flex justify-between items-center">
           <span>{props.todo.createdAt}</span>
           <Link to="edit">
-            <button className="btn btn-square btn-outline">Edit</button>
+            <button onClick={props.handleClick} className="btn btn-square btn-outline">Edit</button>
           </Link>
           
         </section>

@@ -1,36 +1,25 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import TodoItem from "../components/TodoItem"
 import { Link } from "react-router-dom"
 import Add from "../components/Add"
 
-function Home() {
-  const [todoData, setTodoData] = useState([])
-  const {current: arr} = useRef(todoData)
+function Home(props) {
   
-
-  useEffect(() => {
-    async function fetchTodos() {
-      // npm install cors and require in backend
-      // adjust url as needed
-      const res =  await fetch('http://localhost:4000/api/todo') 
-      const data = await res.json()
-
-      if (res.ok) {
-        setTodoData(data)
-      }
-    }
-    fetchTodos()
-    console.log('effect ran')
-  }, [arr])
-  
-  const todoItems = todoData.map((todo) => {
+  const todoItems = props.todoData.map((todo) => {
     return (
       <TodoItem 
         key={todo._id}
+        id={todo._id}
         todo={todo}
+        logId={logId}
+        handleClick={() => logId(todo._id)}
       />
     )
   })
+
+  function logId(id) {
+    console.log(id)
+  }
   
   
   return (
@@ -41,7 +30,10 @@ function Home() {
 
       <section className="flex flex-col items-center gap-y-4 w-full">
         <section>
-          <Add />
+          <Add
+            todoData={props.todoData}
+            setTodoData={props.setTodoData}
+          />
         </section>
         <section className="flex flex-wrap gap-4">
           {todoItems}

@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom"
 import { useState } from "react"
 
-function Add() {
+function Add(props) {
   const [todoNote, setTodoNote] = useState({
     title: '',
     description: ''
@@ -28,6 +27,8 @@ function Add() {
         'Content-Type': 'application/json'
       }
     })
+
+    props.setTodoData([...props.todoData, todo])
 
     const data = await res.json()
 
