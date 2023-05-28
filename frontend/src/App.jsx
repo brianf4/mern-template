@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 // pages & components
-import Home from './pages/Home'
+import Index from './pages/Index'
 import Edit from './pages/Edit'
 
 
@@ -23,29 +23,36 @@ function App() {
     fetchTodos()
   }, [])
 
+  function logId(id) {
+    console.log(id)
+  }
+
 
   return (
     <>
       <BrowserRouter>
         <Routes>
+
           <Route 
-            path='/'
+            path='/' 
             element={
-              <Home 
-                todoData={todoData}
+              <Index 
+                todoData={todoData} 
                 setTodoData={setTodoData}
-                
               />
-            }
+            } 
           />
+            
           <Route 
-            path='edit'
+            path='edit/:todoId'
             element={
               <Edit 
                 todoData={todoData}
+                logId={logId}
               />
             }
           />
+
         </Routes>
       </BrowserRouter>
     </>

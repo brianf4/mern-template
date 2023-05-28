@@ -1,12 +1,23 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useState } from "react"
+import { useEffect } from "react";
 
 function Edit(props) {
+  const { todoId } = useParams();
+  console.log(todoId)
+
   const [todoText, setTodoText] = useState({
     title: props.todoData.title,
     description: props.todoData.description
   })
   
+  // useEffect(() => {
+  //   fetch(`http://localhost:4000/api/todo/${props.id}`, {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(note)
+  //   })
+  // }, [])
   
   async function updateTodo() {
     const note = {...todoText}

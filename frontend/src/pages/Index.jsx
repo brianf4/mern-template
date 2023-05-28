@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react"
 import TodoItem from "../components/TodoItem"
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import Add from "../components/Add"
 
-function Home(props) {
+function Index(props) {
   
   const todoItems = props.todoData.map((todo) => {
     return (
@@ -11,15 +10,10 @@ function Home(props) {
         key={todo._id}
         id={todo._id}
         todo={todo}
-        logId={logId}
-        handleClick={() => logId(todo._id)}
       />
     )
   })
 
-  function logId(id) {
-    console.log(id)
-  }
   
   
   return (
@@ -39,9 +33,9 @@ function Home(props) {
           {todoItems}
         </section>
       </section>
-        
+      <Outlet />  
     </main>
   )
 }
 
-export default Home
+export default Index
