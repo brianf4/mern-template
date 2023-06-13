@@ -1,36 +1,18 @@
 import { Link, useParams } from "react-router-dom"
 import { useState } from "react"
-import { useEffect } from "react";
+import { useSelector } from "react-redux"
+import { selectTodoById } from "../features/posts/postsSlice"
 
-function Edit(props) {
-  const { todoId } = useParams();
+
+function Edit() {
+  const { todoId } = useParams()
+  const [text, setText] = useState('')
+
+  const post = useSelector(state => selectTodoById(state, todoId))
+  console.log(post)
   console.log(todoId)
 
-  const [todoText, setTodoText] = useState({
-    title: props.todoData.title,
-    description: props.todoData.description
-  })
   
-  // useEffect(() => {
-  //   fetch(`http://localhost:4000/api/todo/${props.id}`, {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(note)
-  //   })
-  // }, [])
-  
-  async function updateTodo() {
-    const note = {...todoText}
-    
-    const res = await fetch(`http://localhost:4000/api/todo/${props.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(note)
-    })
-    
-  }
-
-
 
   return (
     <section>
@@ -41,7 +23,7 @@ function Edit(props) {
       <form  className=" border-2 border-black w-max">
         <input 
           name="title"
-          value={todoText.title}
+
           type="text" 
           placeholder="Title" 
           className="input input-bordered w-full max-w-xs" 
@@ -52,7 +34,7 @@ function Edit(props) {
 
         <textarea 
           name="description"
-          value={todoText.description}
+
           className="textarea textarea-bordered w-full max-w-xs" placeholder="Description"
           
           defaultValue={`Test info`}
