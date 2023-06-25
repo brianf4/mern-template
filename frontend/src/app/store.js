@@ -3,6 +3,6 @@ import postReducer from '../features/posts/postsSlice'
 
 export default configureStore({
   reducer: {
-    todos: postReducer
+    post: postReducer
   }
 })

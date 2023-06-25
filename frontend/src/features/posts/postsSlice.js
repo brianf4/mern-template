@@ -49,11 +49,11 @@ export const postsSlice = createSlice({
   }
 })
 
-export const selectAllTodos = (state) => state.todos.todos
+export const selectAllTodos = (state) => state.post.todos
 
 // issue with selecting 
 export const selectTodoById = (state, todoId) =>
-  state.todos.todos.find(todo => todo._id === todoId)
+  state.post.todos.find(todo => todo._id === todoId)
 
 export const { todoUpdate } = postsSlice.actions
 

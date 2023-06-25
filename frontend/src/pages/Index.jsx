@@ -9,7 +9,7 @@ function Index() {
   const todos = useSelector(selectAllTodos)
   dispatch(fetchTodos)
 
-  const postStatus = useSelector(state => state.todos.status)
+  const postStatus = useSelector(state => state.post.status)
 
   console.log(todos)
  
