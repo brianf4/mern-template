@@ -10,8 +10,7 @@ function Index() {
   dispatch(fetchTodos)
 
   const postStatus = useSelector(state => state.post.status)
-
-  console.log(todos)
+  
  
   useEffect(() => {
     if (postStatus === 'idle') {

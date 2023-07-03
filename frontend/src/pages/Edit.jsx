@@ -1,18 +1,40 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { useSelector } from "react-redux"
-import { selectTodoById } from "../features/posts/postsSlice"
+import { useSelector, useDispatch } from "react-redux"
+import { selectTodoById, updateTodo } from "../features/posts/postsSlice"
+import { useEffect } from "react"
 
 
 function Edit() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { todoId } = useParams()
-  const [text, setText] = useState('')
-
   const post = useSelector(state => selectTodoById(state, todoId))
-  console.log(post)
-  console.log(todoId)
+  const postStatus = useSelector(state => state.post.status)
 
+  const [text, setText] = useState({
+    title: post.title,
+    description: post.description
+  })
   
+
+  function handleSubmit(event) {
+    event.preventDefault()
+
+    const todo = { ...text }
+    dispatch(updateTodo({todoId, todo})).unwrap()
+    navigate('/')
+  }
+  
+
+  function handleChange(event) {
+    setText(prevText => {
+      return {
+        ...prevText,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
 
   return (
     <section>
@@ -20,24 +42,22 @@ function Edit() {
         <h1 className="text-4xl underline hover:text-blue-900">Edit Todo</h1>
       </Link>
       
-      <form  className=" border-2 border-black w-max">
+      <form onSubmit={handleSubmit} className=" border-2 border-black w-max">
         <input 
           name="title"
-
+          value={text.title}
           type="text" 
           placeholder="Title" 
           className="input input-bordered w-full max-w-xs" 
-          
-          defaultValue={`Test Title`}
+          onChange={handleChange}
           required
         />
 
         <textarea 
           name="description"
-
+          value={text.description}
           className="textarea textarea-bordered w-full max-w-xs" placeholder="Description"
-          
-          defaultValue={`Test info`}
+          onChange={handleChange}
           required
         ></textarea>
 
