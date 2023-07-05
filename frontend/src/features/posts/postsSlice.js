@@ -39,14 +39,7 @@ export const postsSlice = createSlice({
   name: 'todos',
   initialState,
   reducers:{
-    todoUpdate(state, action) {
-      const { id, title, description } = action.payload
-      const existingTodo = state.find(todo => todo._id === id)
-      if (existingTodo) {
-        existingTodo.title = title
-        existingTodo.description = description
-      }
-    }
+
   },
   extraReducers(builder) {
     builder
