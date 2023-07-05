@@ -20,7 +20,7 @@ function Edit() {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    
+
     await dispatch(updateTodo({todoId, text})).unwrap()
     navigate('/')
   }

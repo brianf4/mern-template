@@ -63,7 +63,12 @@ export const postsSlice = createSlice({
       .addCase(updateTodo.fulfilled, (state, action) => {
         state.status = 'succeeded'
         // Add any fetched todos to the array
-        state.todos = action.payload
+        const existingPost = state.todos.find((post) => post._id === action.payload._id)
+        if (existingPost) {
+          existingPost.title = action.payload.title
+          existingPost.description = action.payload.description
+        }
+        
       })
       .addCase(updateTodo.rejected, (state, action) => {
         state.status = 'failed'

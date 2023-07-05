@@ -26,7 +26,7 @@ function Index() {
       />
     )
   })
-  console.log(todoItems)
+
 
   
   return (
