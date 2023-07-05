@@ -19,16 +19,16 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   }
 })
 
-export const updateTodo = createAsyncThunk('todos/updateTodo', async (id, textData) => {
-  const todoText = textData
+export const updateTodo = createAsyncThunk('todos/updateTodo', async (object) => {
+  const textInfo = { ...object.text }
+
   try {
-    const res = await fetch(BASE_URL + id, {
+    const res = await fetch(BASE_URL + object.todoId, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(todoText)
+      body: JSON.stringify(textInfo)
     })
-    const data = await res.json()
-    console.log(todoText)
+    const data = await res.json(textInfo)
     return data
   } catch (error) {
     console.log(error)

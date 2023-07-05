@@ -15,14 +15,13 @@ function Edit() {
     title: post.title,
     description: post.description
   })
-  console.log(text)
+
   
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-
-
-    dispatch(updateTodo({todoId, text})).unwrap()
+    
+    await dispatch(updateTodo({todoId, text})).unwrap()
     navigate('/')
   }
   
