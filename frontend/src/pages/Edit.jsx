@@ -2,7 +2,6 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { selectTodoById, updateTodo } from "../features/posts/postsSlice"
-import { useEffect } from "react"
 
 
 function Edit() {
@@ -16,13 +15,14 @@ function Edit() {
     title: post.title,
     description: post.description
   })
+  console.log(text)
   
 
   function handleSubmit(event) {
     event.preventDefault()
 
-    const todo = { ...text }
-    dispatch(updateTodo({todoId, todo})).unwrap()
+
+    dispatch(updateTodo({todoId, text})).unwrap()
     navigate('/')
   }
   

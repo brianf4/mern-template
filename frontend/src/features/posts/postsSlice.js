@@ -50,7 +50,7 @@ export const postsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      // READ
+      // *********** READ **************
       .addCase(fetchTodos.pending, (state, action) => {
         state.status = 'loading'
       })
@@ -63,7 +63,7 @@ export const postsSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
-      // UPDATE
+      // ******* UPDATE **********
       .addCase(updateTodo.pending, (state, action) => {
         state.status = 'loading'
       })
