@@ -16,8 +16,6 @@ function Edit() {
     description: post.description
   })
 
-  
-
   async function handleSubmit(event) {
     event.preventDefault()
 

@@ -19,6 +19,18 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   }
 })
 
+export const addTodo = createAsyncThunk('todos/addTodo', async (todo) => {
+  try {
+    const res = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(textInfo)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 export const updateTodo = createAsyncThunk('todos/updateTodo', async (object) => {
   const textInfo = { ...object.text }
 
@@ -29,6 +41,20 @@ export const updateTodo = createAsyncThunk('todos/updateTodo', async (object) =>
       body: JSON.stringify(textInfo)
     })
     const data = await res.json(textInfo)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id) => 
+{
+
+  try {
+    const res = await fetch(BASE_URL + id, {
+      method: 'DELETE',
+    })
+    const data = await res.json()
     return data
   } catch (error) {
     console.log(error)
@@ -74,6 +100,27 @@ export const postsSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
+      // ******* DELETE **********
+      .addCase(deleteTodo.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        
+        state.todos = state.todos.filter(todo => todo._id !== action.payload._id)
+        
+      })
+      .addCase(deleteTodo.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+
+      // ******* ADD **********
+      .addCase(addTodo.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        
+        state.todos.push(action.payload)
+      })
   }
 })
 
@@ -83,6 +130,6 @@ export const selectAllTodos = (state) => state.post.todos
 export const selectTodoById = (state, todoId) =>
   state.post.todos.find(todo => todo._id === todoId)
 
-export const { todoUpdate } = postsSlice.actions
+export const { } = postsSlice.actions
 
 export default postsSlice.reducer

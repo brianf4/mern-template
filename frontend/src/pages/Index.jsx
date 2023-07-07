@@ -32,9 +32,17 @@ function Index() {
   return (
     <main className="flex flex-col items-center gap-y-20 border-2 border-red-400">
       
-      <Link to='/'>
-        <h1 className="text-4xl underline">My todo list</h1>
-      </Link>
+      <div className='p-4 flex gap-x-4'>
+        <Link to='/'>
+          <h1 className="text-4xl underline">My todo list</h1>
+        </Link>
+        <Link 
+          to='add'
+          className='btn btn-primary'
+        >
+          Add +
+        </Link>
+      </div>
 
       <section className="flex flex-col items-center gap-y-4 w-full">
         <section>
