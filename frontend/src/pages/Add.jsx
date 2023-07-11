@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/posts/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 function Add() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [text, setText] = useState({
         title: '',
@@ -18,13 +20,15 @@ function Add() {
           })
     }
 
-    async function handlePostSubmit() {
-        await dispatch(addTodo(text))
+     function handlePostSubmit(event) {
+        event.preventDefault()
+        dispatch(addTodo(text))
+        navigate('/')
     }
     
     return (
-        <div className="flex flex-col">
-            <form onSubmit={handlePostSubmit}>
+        <div>
+            <form className="flex flex-col" onSubmit={handlePostSubmit}>
                 <label>Title: </label>
                 <input 
                     type="text" 

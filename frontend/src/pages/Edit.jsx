@@ -9,7 +9,6 @@ function Edit() {
   const dispatch = useDispatch()
   const { todoId } = useParams()
   const post = useSelector(state => selectTodoById(state, todoId))
-  const postStatus = useSelector(state => state.post.status)
 
   const [text, setText] = useState({
     title: post.title,

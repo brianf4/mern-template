@@ -21,11 +21,15 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
 
 export const addTodo = createAsyncThunk('todos/addTodo', async (todo) => {
   try {
+    console.log(todo)
+    const textInfo = { ...todo }
     const res = await fetch(BASE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(textInfo)
     })
+    const data = await res.json(textInfo)
+    return data
   } catch (error) {
     console.log(error)
   }
