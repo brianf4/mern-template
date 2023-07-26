@@ -1,0 +1,1 @@
+A template using the MERN stack using tailwind css for styling and redux & redux toolkit for state management.
