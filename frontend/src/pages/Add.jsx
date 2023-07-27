@@ -20,7 +20,7 @@ function Add() {
           })
     }
 
-     function handlePostSubmit(event) {
+    function handlePostSubmit(event) {
         event.preventDefault()
         dispatch(addTodo(text))
         navigate('/')
