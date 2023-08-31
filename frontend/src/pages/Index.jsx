@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 function Index() {
   const dispatch = useDispatch()
   const todos = useSelector(selectAllTodos)
-  dispatch(fetchTodos)
 
   const postStatus = useSelector(state => state.post.status)
   
